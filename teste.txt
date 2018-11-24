@@ -1,0 +1,37 @@
+Fulano de Tal
+exemplo 1
+101
+m
+3
+4.5
+s
+exemplo 2
+102
+kg
+5
+8.5
+s
+exemplo 3
+103
+kg
+10
+0.5
+s
+exemplo 4
+104
+cm
+8
+2
+s
+exemplo 5
+105
+unidade
+15
+1
+s
+exemplo 6
+106
+gm
+20
+12
+n
