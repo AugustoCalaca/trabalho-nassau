@@ -12,6 +12,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if defined(_WIN32) || defined(WIN32)
+#define LIMPA system("cls")
+#else
+#define LIMPA system("clear")
+#endif
+
 #define CONTROLE 's'
 #define TAM_NOME 70
 #define TAM_TAB 100
@@ -33,11 +39,11 @@ void flush() {
     while((ch = fgetc(stdin)) != EOF && ch != '\n') { }
 }
 
-float calcValTot(float valorUni, int qtd) {
+float calcValTotParcial(float valorUni, int qtd) {
   return valorUni * qtd;
 }
 
-float calcValTotTudo(struct LinhaTabela* linha, int n) {
+float calcValTot(struct LinhaTabela* linha, int n) {
   float tot = 0;
   for(int i = 0; i < n; i++)
     tot += linha[i].valorTot;
@@ -77,7 +83,7 @@ void mostraTabela(struct LinhaTabela* linha, char nome[],  int n) {
     mostraLinha(linha, i);
 
   printf("+%s+\n", insereIgual(77));
-  printf("|%50cVALOR TOTAL | R$%10.2f |\n", ESPACO, calcValTotTudo(linha, n));
+  printf("|%50cVALOR TOTAL | R$%10.2f |\n", ESPACO, calcValTot(linha, n));
   printf("+%s+\n\n\n", insereIgual(77));
 }
 
@@ -85,8 +91,7 @@ int main() {
   char nomeSolicitante[TAM_NOME];
   struct LinhaTabela linha[TAM_TAB];
 
-  // system("cls");
-  system("clear");
+  LIMPA;
 
   while(1) {
     printf("Insira seu nome: ");
@@ -150,7 +155,7 @@ int main() {
 
     // com os devidos valores informados pode-se calcular o
     // valor total de cada material e adicioanar na nossa struct
-    linha[i].valorTot = calcValTot(linha[i].valorUni, linha[i].qtd);
+    linha[i].valorTot = calcValTotParcial(linha[i].valorUni, linha[i].qtd);
 
     // apenas 's' sera considerado como desejo de continuar
     do {
